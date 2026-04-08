@@ -7,3 +7,12 @@ def detect_anomalies(df):
     df['anomaly'] = model.fit_predict(features)
 
     return df
+   
+def add_rule_based_flags(df):
+    df['rule_flag'] = 0
+
+    # Simple medical thresholds
+    df.loc[df['heart_rate'] > 120, 'rule_flag'] = 1
+    df.loc[df['temperature'] > 38, 'rule_flag'] = 1
+
+    return df
